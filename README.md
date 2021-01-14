@@ -1,16 +1,19 @@
-### Hi there 👋
+name: GitHub-Profile-Summary-Cards
 
-<!--
-**parsecmonkey/parsecmonkey** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+on:
+  schedule: # execute every 24 hours
+    - cron: '* */24 * * *'
+  workflow_dispatch:
 
-Here are some ideas to get you started:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: generate
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    steps:
+      - uses: actions/checkout@v2
+      - uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: ${{ github.repository_owner }}
